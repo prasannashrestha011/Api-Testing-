@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="FileSharing.Components.SideBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FileSharing.Components" xmlns:models="clr-namespace:FileSharing.Models" d:DataContext="{d:DesignInstance Type=models:SideBarViewModel}"
+             mc:Ignorable="d" 
+             Background="White"
+                          d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../UI_Designs/Buttons_Ui.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="{Binding Theme.ThemeColor}">
+        <Border BorderBrush="DimGray" BorderThickness="0.5">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Height="40" Width="Auto">
+                    <Button Command="{Binding ClearList}"
+                            Height="30"
+                            Margin="4,0,4,0" Width="41" Style="{StaticResource RedShadowButtonStyle}">
+
+                        <Image Source="../ImageSource/delete.png" Margin="2" />
+                    </Button>
+                    <Button Command="{Binding RefreshList}" Style="{StaticResource GradientButtonStyle }" 
+                            Height="30"
+                            Width="31">
+                        <Image Source="../ImageSource/Refresh_icon.svg.png" Margin="2"/>
+                    </Button>
+                </StackPanel>
+                <Grid Grid.Row="1">
+                    <TextBlock HorizontalAlignment="Center" Text="Recent requests"/>
+                    <ListBox
+                    Background="{Binding Theme.ThemeColor}"
+                     Foreground="{Binding Theme.FontColor}"
+                     ItemsSource="{Binding SaveList,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                     SelectedItem="{Binding SelectedHttpItem,UpdateSourceTrigger=PropertyChanged}"
+                    FontFamily="{Binding FontName}"
+                      BorderBrush="DimGray"
+                     BorderThickness="0.5"
+                      Width="Auto"
+                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                     FontSize="13"
+                    DisplayMemberPath="HttpDomain"
+                    />
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

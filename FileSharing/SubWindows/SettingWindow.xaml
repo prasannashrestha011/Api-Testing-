@@ -1,0 +1,35 @@
+﻿<Window x:Class="FileSharing.SubWindows.SettingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FileSharing.SubWindows"
+        xmlns:sidebar="clr-namespace:FileSharing.Components" xmlns:models="clr-namespace:FileSharing.Models" d:DataContext="{d:DesignInstance Type=models:SettingMainViewModel}"
+        xmlns:views="clr-namespace:FileSharing.Views"
+        mc:Ignorable="d"
+         ResizeMode="NoResize"
+        Title="Settings" Height="510" MinHeight="510" MaxHeight="510" Width="400" MinWidth="400" MaxWidth="400" >
+    <Grid Background="{Binding Theme.ThemeColor,UpdateSourceTrigger=PropertyChanged}" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="110"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <sidebar:SettingSideBar DataContext="{Binding SettingSideBarViewModel}" 
+                                FontFamily="{Binding DataContext.FontName,RelativeSource={RelativeSource AncestorType=Window}}"
+                                FontColor="{Binding DataContext.Theme.FontColor,RelativeSource={RelativeSource AncestorType=Window}}"/>
+        <ContentControl Content="{Binding CurrentViewModel,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" >
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type models:ThemeViewModel }">
+                    <views:ThemeView 
+                         FontFamily="{Binding DataContext.FontName,RelativeSource={RelativeSource AncestorType=Window}}"
+                        FontColor="{Binding DataContext.Theme.FontColor,RelativeSource={RelativeSource AncestorType=Window}}" />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type models:FontsViewModel }">
+                    <views:FontsView  
+                        FontFamily="{Binding DataContext.FontName,RelativeSource={RelativeSource AncestorType=Window}}"
+                        FontColor="{Binding DataContext.Theme.FontColor, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+    </Grid>
+</Window>
