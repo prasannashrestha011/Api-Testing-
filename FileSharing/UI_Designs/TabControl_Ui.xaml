@@ -1,0 +1,40 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style
+        x:Name="TabHeader_Ui"
+        x:Key="TabHeader"
+        TargetType="TabItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border 
+                        x:Name="Border"
+                        Background="{TemplateBinding Background}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        Width="103"
+                        Padding="4"
+                            >
+                        <TextBlock
+                            x:Name="HeaderText"
+                            Text="{TemplateBinding Header}"
+                            FontFamily="Georgia"
+                            FontWeight="SemiBold"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Foreground="{Binding RelativeSource={RelativeSource AncestorType=TabItem}, Path=Foreground}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Panel.ZIndex" Value="1"/>
+                            <Setter TargetName="Border" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType=TabItem}, Path=Foreground}"/>
+                            <Setter TargetName="HeaderText" Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType=TabItem}, Path=Background}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+   
+</ResourceDictionary>

@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ImageSource\202.jpg" />
+    <None Remove="ImageSource\404.jpg" />
+    <None Remove="ImageSource\Add.png" />
+    <None Remove="ImageSource\delete.png" />
+    <None Remove="ImageSource\Refresh_icon.svg.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AvalonEdit" Version="6.3.0.90" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NicolasRepiquet.FontAwesomeWPF" Version="1.0.0" />
+    <PackageReference Include="System.ObjectModel" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LoadingControl\LoadingControl.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ImageSource\202.jpg" />
+    <Resource Include="ImageSource\404.jpg" />
+    <Resource Include="ImageSource\Add.png" />
+    <Resource Include="ImageSource\delete.png" />
+    <Resource Include="ImageSource\Refresh_icon.svg.png" />
+  </ItemGroup>
+
+</Project>

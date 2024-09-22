@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="FileSharing.Views.ThemeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FileSharing.Views"
+             mc:Ignorable="d" 
+             
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../UI_Designs/Buttons_Ui.xaml"/>
+                <ResourceDictionary Source="../UI_Designs/ComboBox_Ui.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,0">
+        <StackPanel >
+        
+                <StackPanel Orientation="Horizontal" Width="Auto">
+                    <StackPanel Orientation="Horizontal">
+                    <Label Content="Theme"    
+                             FontSize="14.5"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                            Foreground="{Binding FontColor,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                           FontFamily="{Binding FontFamily,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                           />
+                    <ComboBox 
+                     Foreground="{Binding FontColor,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        ItemsSource="{Binding Themes,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedThemeItem,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        SelectedValuePath="Content"
+                        Style="{StaticResource ModernComboBoxStyle}"
+                        ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
+                        FontFamily="{Binding FontFamily,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        Width="180"
+                         Height="35" />
+                    </StackPanel>
+                              
+            </StackPanel>
+         
+        </StackPanel>
+    </Grid>
+</UserControl>
