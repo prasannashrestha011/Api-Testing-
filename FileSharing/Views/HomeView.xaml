@@ -203,146 +203,136 @@
             </TabControl>
         </Grid>
         <Grid Grid.Row="5">
-            <TabControl
+            <ContentControl>
+                <ContentControl.Style>
+                    <Style TargetType="ContentControl">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding DisplayBoard,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Value="initialDisplay">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <Image Source="../ImageSource/202.jpg"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding DisplayBoard,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Value="loadingDisplay">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <loadingcontrol:LoadingControl Thickness="4" Diameter="50" LoadingStatus="True" Color="{Binding  Theme.FontColor}"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding DisplayBoard,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Value="bodyDisplay">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <TabControl
                  BorderBrush="DimGray"
                 BorderThickness="0.5"
                 Background="{Binding Theme.ThemeColor}"
                 Foreground="{Binding Theme.FontColor}"
                 ItemsSource="{Binding TabControl.Tabs}"        
                 >
-              
-                <TabControl.Items >
-                    <TabItem Header="Response Body"  Style="{StaticResource TabHeader  }" Foreground="{Binding Theme.FontColor}" BorderBrush="DimGray" BorderThickness="0.5" Background="{Binding Theme.ThemeColor}">
-                        <Border Grid.Row="4" MaxWidth="900">
-                            <ContentControl  >
-                                <ContentControl.Style>
-                                    <Style TargetType="ContentControl">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding HttpStatus,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Value="202">
-                                                <Setter Property="Content">
-                                                    <Setter.Value>
 
-                                                        <Image Source="/ImageSource/202.jpg"/>
-
-                                                    </Setter.Value>
-                                                </Setter> 
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding HttpStatus,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Value="404">
-                                                <Setter Property="Content">
-                                                    <Setter.Value>
-                                                        <Image Source="/ImageSource/404.jpg"/>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding HttpStatus,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Value="200">
-                                                <Setter Property="Content">
-                                                    <Setter.Value>
-                                                        <Border Grid.Row="3">
-                                                            <avalonEdit:TextEditor Name="textEditor"
+                                            <TabControl.Items >
+                                                <TabItem Header="Response Body"  Style="{StaticResource TabHeader  }" Foreground="{Binding Theme.FontColor}" BorderBrush="DimGray" BorderThickness="0.5" Background="{Binding Theme.ThemeColor}">
+                                                    <Border Grid.Row="4" MaxWidth="900">
+                                                        <avalonEdit:TextEditor Name="textEditor"
                                                               FontFamily="Trebuchet MS"
                                                              Background="{Binding Theme.EditorTheme}"             
                                                               FontSize="15"
                                                               Document="{Binding TextDocument,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                               SyntaxHighlighting="JavaScript"
                                                               HorizontalScrollBarVisibility="Hidden"
-                                                              />      
-                                                        </Border>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </DataTrigger>
-                                            <DataTrigger   Binding="{Binding HttpStatus,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Value="199">
-                                                <Setter Property="Content">
-                                                    <Setter.Value>
-                                                        <loadingcontrol:LoadingControl LoadingStatus="True" Thickness="4" Diameter="50"/>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </ContentControl.Style>
-                            </ContentControl>
-                        </Border>
-                    </TabItem>
-                    <TabItem Header="Header"  Style="{StaticResource TabHeader  }" Foreground="{Binding Theme.FontColor}" Background="{Binding Theme.ThemeColor}"  BorderBrush="DimGray" BorderThickness="0.5">
-                        <FlowDocument >
-                            <Table  BorderBrush="{Binding Theme.ThemeColor}" BorderThickness="0.5">
-                                <Table.Columns>
-                                    <TableColumn Width="Auto"/>
-                                    <TableColumn Width="Auto"/>
-                                </Table.Columns>
-                                <TableRowGroup >
-                                    <TableRow >
-                                        <TableCell BorderBrush="DimGray" BorderThickness="0.5">
-                                            <Paragraph>Date</Paragraph>
-                                        </TableCell>
-                                        <TableCell BorderBrush="DimGray" BorderThickness="0.5">
-                                            <Paragraph>
-                                                <Run Text="{Binding HttpHeader.Date}"/>
-                                            </Paragraph>
-                                        </TableCell>
-                                    </TableRow>  
-                                    <TableRow >
-                                        <TableCell BorderBrush="DimGray" BorderThickness="0.5">
-                                            <Paragraph>Content-Type</Paragraph>
-                                        </TableCell>
-                                        <TableCell BorderBrush="DimGray" BorderThickness="0.5">
-                                            <Paragraph>
-                                                <Run Text="{Binding HttpHeader.Content_Type}"/>
-                                            </Paragraph>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell BorderBrush="DimGray" BorderThickness="0.5">
-                                            <Paragraph>Transfer-Encoding</Paragraph>
-                                        </TableCell>
-                                        <TableCell BorderBrush="DimGray" BorderThickness="0.5">
-                                            <Paragraph>
-                                                <Run Text="{Binding HttpHeader.Transfer_Encoding}"/>
-                                            </Paragraph>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell BorderBrush="DimGray" BorderThickness="0.5">
-                                            <Paragraph>Age</Paragraph>
-                                        </TableCell>
-                                        <TableCell BorderBrush="DimGray" BorderThickness="0.5">
-                                            <Paragraph>
-                                                <Run Text="{Binding HttpHeader.Age}" />
-                                            </Paragraph>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow >
-                                        <TableCell BorderBrush="DimGray" BorderThickness="0.5">
-                                            <Paragraph>Authorization</Paragraph>
-                                        </TableCell>
-                                        <TableCell BorderBrush="DimGray" BorderThickness="0.5">
-                                            <Paragraph>
-                                                <Run Text="{Binding HttpHeader.Authorization}"/>
-                                            </Paragraph>
-                                        </TableCell>
-                                    </TableRow> 
-                                    <TableRow >
-                                        <TableCell BorderBrush="DimGray" BorderThickness="0.5">
-                                            <Paragraph>Connection</Paragraph>
-                                        </TableCell>
-                                        <TableCell BorderBrush="DimGray" BorderThickness="0.5">
-                                            <Paragraph>
-                                                <Run Text="{Binding HttpHeader.Connection}" />
-                                            </Paragraph>
-                                        </TableCell>
-                                    </TableRow>
+                                                              />
 
-                                </TableRowGroup>
+                                                    </Border>
+                                                </TabItem>
+                                                <TabItem Header="Header"  Style="{StaticResource TabHeader  }" Foreground="{Binding Theme.FontColor}" Background="{Binding Theme.ThemeColor}"  BorderBrush="DimGray" BorderThickness="0.5">
+                                                    <FlowDocument >
+                                                        <Table  BorderBrush="{Binding Theme.ThemeColor}" BorderThickness="0.5">
+                                                            <Table.Columns>
+                                                                <TableColumn Width="Auto"/>
+                                                                <TableColumn Width="Auto"/>
+                                                            </Table.Columns>
+                                                            <TableRowGroup >
+                                                                <TableRow >
+                                                                    <TableCell BorderBrush="DimGray" BorderThickness="0.5">
+                                                                        <Paragraph>Date</Paragraph>
+                                                                    </TableCell>
+                                                                    <TableCell BorderBrush="DimGray" BorderThickness="0.5">
+                                                                        <Paragraph>
+                                                                            <Run Text="{Binding HttpHeader.Date}"/>
+                                                                        </Paragraph>
+                                                                    </TableCell>
+                                                                </TableRow>
+                                                                <TableRow >
+                                                                    <TableCell BorderBrush="DimGray" BorderThickness="0.5">
+                                                                        <Paragraph>Content-Type</Paragraph>
+                                                                    </TableCell>
+                                                                    <TableCell BorderBrush="DimGray" BorderThickness="0.5">
+                                                                        <Paragraph>
+                                                                            <Run Text="{Binding HttpHeader.Content_Type}"/>
+                                                                        </Paragraph>
+                                                                    </TableCell>
+                                                                </TableRow>
+                                                                <TableRow>
+                                                                    <TableCell BorderBrush="DimGray" BorderThickness="0.5">
+                                                                        <Paragraph>Transfer-Encoding</Paragraph>
+                                                                    </TableCell>
+                                                                    <TableCell BorderBrush="DimGray" BorderThickness="0.5">
+                                                                        <Paragraph>
+                                                                            <Run Text="{Binding HttpHeader.Transfer_Encoding}"/>
+                                                                        </Paragraph>
+                                                                    </TableCell>
+                                                                </TableRow>
+                                                                <TableRow>
+                                                                    <TableCell BorderBrush="DimGray" BorderThickness="0.5">
+                                                                        <Paragraph>Age</Paragraph>
+                                                                    </TableCell>
+                                                                    <TableCell BorderBrush="DimGray" BorderThickness="0.5">
+                                                                        <Paragraph>
+                                                                            <Run Text="{Binding HttpHeader.Age}" />
+                                                                        </Paragraph>
+                                                                    </TableCell>
+                                                                </TableRow>
+                                                                <TableRow >
+                                                                    <TableCell BorderBrush="DimGray" BorderThickness="0.5">
+                                                                        <Paragraph>Authorization</Paragraph>
+                                                                    </TableCell>
+                                                                    <TableCell BorderBrush="DimGray" BorderThickness="0.5">
+                                                                        <Paragraph>
+                                                                            <Run Text="{Binding HttpHeader.Authorization}"/>
+                                                                        </Paragraph>
+                                                                    </TableCell>
+                                                                </TableRow>
+                                                                <TableRow >
+                                                                    <TableCell BorderBrush="DimGray" BorderThickness="0.5">
+                                                                        <Paragraph>Connection</Paragraph>
+                                                                    </TableCell>
+                                                                    <TableCell BorderBrush="DimGray" BorderThickness="0.5">
+                                                                        <Paragraph>
+                                                                            <Run Text="{Binding HttpHeader.Connection}" />
+                                                                        </Paragraph>
+                                                                    </TableCell>
+                                                                </TableRow>
+
+                                                            </TableRowGroup>
 
 
-                            </Table>
-                        </FlowDocument>
-                    </TabItem>
-                    <TabItem Header="Tab3"  Style="{StaticResource TabHeader  }" Foreground="{Binding Theme.FontColor}" Background="{Binding Theme.ThemeColor}" BorderBrush="DimGray" BorderThickness="0.5">
-                     
-                    </TabItem>
-                </TabControl.Items>
-            </TabControl>
+                                                        </Table>
+                                                    </FlowDocument>
+                                                </TabItem>
+                                                <TabItem Header="Tab3"  Style="{StaticResource TabHeader  }" Foreground="{Binding Theme.FontColor}" Background="{Binding Theme.ThemeColor}" BorderBrush="DimGray" BorderThickness="0.5">
+
+                                                </TabItem>
+                                            </TabControl.Items>
+                                        </TabControl>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
         </Grid>
 
     </Grid>

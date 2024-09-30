@@ -70,7 +70,7 @@ namespace FileSharing.Models
                 OnPropertyChange(nameof(HttpStatusCode));
             }
         }
-        private int httpStatus=202;
+
 
         private HttpHeader httpHeader;
         public HttpHeader HttpHeader
@@ -85,13 +85,14 @@ namespace FileSharing.Models
                 OnPropertyChange(nameof(HttpHeader));
             }
         }
-        public int HttpStatus
+        private string displayBoard = "initialDisplay";
+        public string DisplayBoard
         {
-            get { return httpStatus; }
+            get { return displayBoard; }
             set
             {
-                httpStatus = value;
-                OnPropertyChange(nameof(HttpStatus));
+                displayBoard = value;
+                OnPropertyChange(nameof(DisplayBoard));
               
             }
         }
@@ -243,7 +244,7 @@ namespace FileSharing.Models
         {
             try
             {
-                HttpStatus = 199;
+                DisplayBoard = "loadingDisplay";
                 SendRequest sendRequest = new SendRequest(httpData, HttpSenderHeaderList);
                 var httpResponseString="";
                 switch (method)
@@ -268,10 +269,7 @@ namespace FileSharing.Models
                 var JsonFormatter = new JsonFormatter(httpResponseString);
                 var formattedJson = JsonFormatter.FormatJson();
 
-                if (formattedJson == "url not found")
-                    HttpStatus = 404;
-                else
-                    HttpStatus = 200;
+                DisplayBoard = "bodyDisplay";
 
                 HttpResponse = formattedJson;
                 TextDocument.Text = formattedJson;
